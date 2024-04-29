@@ -60,7 +60,7 @@ public class ServiceController {
 		return Response.ok(data);
 	}
 	
-	@GetMapping("/type/{id}")
+	@GetMapping("/types/{id}")
 	public ResponseEntity<ResponseBody> getByType(@PathVariable int id){
 		try {
 			List<ServiceModel> data = serviceService.getServicesByType(id);
