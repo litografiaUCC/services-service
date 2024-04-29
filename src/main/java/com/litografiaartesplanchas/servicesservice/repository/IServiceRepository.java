@@ -9,4 +9,5 @@ import com.litografiaartesplanchas.servicesservice.model.TypeService;
 
 public interface IServiceRepository extends JpaRepository<ServiceModel, Long>{
 	List<ServiceModel> findByTypeService(TypeService type);
+	boolean existsByName(String name);
 }
