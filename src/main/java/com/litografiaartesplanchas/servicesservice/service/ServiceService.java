@@ -30,11 +30,11 @@ public class ServiceService {
 	public List<ServiceModel> getAll(){
 		return serviceRepository.findAll();
 	}
+
 	
-	/*
 	public Optional<ServiceModel> getServiceById(long id) {
 		return serviceRepository.findById(id);
-	}*/
+	}
 	
 	public List<TypeService> getTypesService(){
 		return typeServiceRepository.findAll();

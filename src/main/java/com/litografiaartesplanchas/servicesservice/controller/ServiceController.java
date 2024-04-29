@@ -34,7 +34,6 @@ public class ServiceController {
 		return Response.ok(data);
 	}
 
-	/*
 	@GetMapping(value = "/{id}")
 	@ApiResponses({
         @ApiResponse(responseCode = "200"),
@@ -53,7 +52,7 @@ public class ServiceController {
 		}catch(Exception e) {
 			return ErrorHandlerResponse.handleException(e);
 		}
-	}*/
+	}
 	
 	@GetMapping("/types")
 	public ResponseEntity<ResponseBody> getAllTypes(){
