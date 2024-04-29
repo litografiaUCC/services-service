@@ -13,6 +13,7 @@ import com.litografiaartesplanchas.servicesservice.repository.IMaterialRepositor
 import com.litografiaartesplanchas.servicesservice.repository.IServiceMaterialRepository;
 import com.litografiaartesplanchas.servicesservice.repository.IServiceRepository;
 import com.litografiaartesplanchas.servicesservice.repository.ITypeServiceRepository;
+import com.litografiaartesplanchas.servicesservice.utils.errors.NotFoundException;
 
 @Service
 public class ServiceService {
@@ -34,6 +35,13 @@ public class ServiceService {
 	
 	public Optional<ServiceModel> getServiceById(long id) {
 		return serviceRepository.findById(id);
+	}
+	
+	public List<ServiceModel> getServicesByType(long id) throws NotFoundException{
+		Optional<TypeService> optionalType = typeServiceRepository.findById(id);
+		if(optionalType.isEmpty()) throw new NotFoundException("Type don't exist");
+		TypeService type = optionalType.get();
+		return serviceRepository.findByTypeService(type);
 	}
 	
 	public List<TypeService> getTypesService(){
