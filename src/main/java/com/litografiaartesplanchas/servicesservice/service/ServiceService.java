@@ -1,6 +1,7 @@
 package com.litografiaartesplanchas.servicesservice.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,22 +27,15 @@ public class ServiceService {
 	@Autowired
 	private IEmployeeRepository employeeRepository;
 	
-	/**
-	 * The above function returns a list of ServiceModel objects by calling the findAll method on the
-	 * serviceRepository.
-	 * 
-	 * @return A List of ServiceModel objects is being returned.
-	 */
 	public List<ServiceModel> getAll(){
 		return serviceRepository.findAll();
 	}
 	
-	/**
-	 * The function `getTypesService` returns a list of all `TypeService` objects from the
-	 * `typeServiceRepository`.
-	 * 
-	 * @return A List of TypeService objects is being returned.
-	 */
+	/*
+	public Optional<ServiceModel> getServiceById(long id) {
+		return serviceRepository.findById(id);
+	}*/
+	
 	public List<TypeService> getTypesService(){
 		return typeServiceRepository.findAll();
 	}
