@@ -59,4 +59,15 @@ public class ServiceController {
 		List<TypeService> data = serviceService.getTypesService();
 		return Response.ok(data);
 	}
+	
+	@GetMapping("/type/{id}")
+	public ResponseEntity<ResponseBody> getByType(@PathVariable int id){
+		try {
+			List<ServiceModel> data = serviceService.getServicesByType(id);
+			return Response.ok(data);
+		}catch(Exception e) {
+			return ErrorHandlerResponse.handleException(e);
+		}
+
+	}
 }
