@@ -43,7 +43,7 @@ public class ServiceModel {
 	@JoinColumn(name = "id_tipo_servicio", nullable = false)
 	private TypeService typeService;
 
-	@ManyToMany(mappedBy = "service")
+	@ManyToMany(mappedBy = "service", cascade = CascadeType.ALL)
     private Set<ServiceMaterial> serviceMaterials;
 	
 	@JoinTable(
@@ -51,7 +51,7 @@ public class ServiceModel {
 	        joinColumns = @JoinColumn(name = "id_servicio", nullable = false),
 	        inverseJoinColumns = @JoinColumn(name="id_empleado", nullable = false)
 	 )
-	 @ManyToMany(cascade = CascadeType.ALL)
+	 @ManyToMany()
 	 private Set<Employee> employees;
 
 	public int getId() {
