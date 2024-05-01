@@ -90,4 +90,14 @@ public class ServiceController {
         }
     }
     
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<ResponseBody> deleteService(@PathVariable int id){
+        try{
+        	serviceService.deleteService(id);
+            return Response.ok();
+        }catch(Exception e){
+            e.printStackTrace();
+            return ErrorHandlerResponse.handleException(e);
+        }
+    }
 }
