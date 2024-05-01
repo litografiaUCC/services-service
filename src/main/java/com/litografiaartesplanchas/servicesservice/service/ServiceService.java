@@ -77,4 +77,9 @@ public class ServiceService {
         serviceRepository.save(service);
         serviceHasMaterialRepository.saveAll(service.getServiceMaterials());
     }
+    
+    public void deleteService(int id) throws NotFoundException {
+        ServiceModel service = this.getServiceById(id);
+        serviceRepository.delete(service);
+    }
 }
