@@ -7,6 +7,9 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
+/**
+ * The Role class represents a database entity for roles with properties id_role and name.
+ */
 @Entity
 @Table(name = "rol")
 public class Role {

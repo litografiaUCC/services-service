@@ -7,6 +7,10 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
+/**
+ * The TypeMaterial class represents an entity mapped to a database table "tipo_material" with id and
+ * name fields.
+ */
 @Entity
 @Table(name = "tipo_material")
 public class TypeMaterial {

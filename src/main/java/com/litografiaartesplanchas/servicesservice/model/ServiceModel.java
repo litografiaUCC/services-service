@@ -16,6 +16,10 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
+/**
+ * The ServiceModel class represents a service entity with various attributes and relationships in a
+ * Java application.
+ */
 @Entity
 @Table(name = "servicio")
 public class ServiceModel {
@@ -50,9 +54,9 @@ public class ServiceModel {
 	        name = "servicio_has_empleado",
 	        joinColumns = @JoinColumn(name = "id_servicio", nullable = false),
 	        inverseJoinColumns = @JoinColumn(name="id_empleado", nullable = false)
-	 )
-	 @ManyToMany()
-	 private Set<Employee> employees;
+	)
+	@ManyToMany()
+	private Set<Employee> employees;
 
 	public int getId() {
 		return id;

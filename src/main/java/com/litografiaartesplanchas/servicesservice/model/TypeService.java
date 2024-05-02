@@ -7,6 +7,10 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
+/**
+ * This Java class represents a TypeService entity with properties for id and name mapped to a database
+ * table named "tipo_servicio".
+ */
 @Entity
 @Table(name = "tipo_servicio")
 public class TypeService {

@@ -11,6 +11,10 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
+/**
+ * The `ServiceMaterial` class represents a relationship between a service and a material with a
+ * quantity in a database table.
+ */
 @Entity
 @Table(name = "servicio_has_material")
 public class ServiceMaterial {

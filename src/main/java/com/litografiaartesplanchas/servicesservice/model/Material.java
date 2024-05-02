@@ -13,6 +13,10 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
+/**
+ * The Material class represents a material entity with properties such as id, name, price, quantity,
+ * typeMaterial, and serviceMaterials.
+ */
 @Entity
 @Table(name = "material")
 public class Material {

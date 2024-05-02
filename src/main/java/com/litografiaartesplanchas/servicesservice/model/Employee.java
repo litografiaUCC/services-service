@@ -9,6 +9,10 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
+/**
+ * The Employee class represents an entity with attributes such as id, name, lastName, email, password,
+ * phone, photo, numberDocument, isActive, typeDocument, and role.
+ */
 @Entity
 @Table(name = "empleado")
 public class Employee {

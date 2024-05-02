@@ -7,6 +7,9 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
+/**
+ * This Java class represents a TypeDocument entity with properties for id, name, and acronym.
+ */
 @Entity
 @Table(name = "tipo_documento")
 public class TypeDocument {
