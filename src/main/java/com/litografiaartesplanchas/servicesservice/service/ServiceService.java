@@ -2,10 +2,12 @@ package com.litografiaartesplanchas.servicesservice.service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.litografiaartesplanchas.servicesservice.model.Employee;
 import com.litografiaartesplanchas.servicesservice.model.Material;
 import com.litografiaartesplanchas.servicesservice.model.ServiceMaterial;
 import com.litografiaartesplanchas.servicesservice.model.ServiceModel;
@@ -57,7 +59,7 @@ public class ServiceService {
     
     public void createService(ServiceModel service) throws ConflictException{
         if(serviceRepository.existsByName(service.getName())) throw new ConflictException("Service already exists.");
-        
+        if(service.getTypeService() == null) throw new ConflictException("Specific the type of service");
         int idTypeService = service.getTypeService().getId();
         Optional<TypeService> optionalTypeService = typeServiceRepository.findById((long) idTypeService);
         if(optionalTypeService.isEmpty()) throw new ConflictException("Invalid type service with id: " + idTypeService);
@@ -65,6 +67,7 @@ public class ServiceService {
         
         for(ServiceMaterial serviceMaterial: service.getServiceMaterials()) {
             Material material = serviceMaterial.getMaterial();
+            if(serviceMaterial.getQuantity() == 0) throw new ConflictException("Specific quantity of material by id: " + material.getId());
             Optional<Material> optionalMaterial = materialRepository.findById((long) material.getId());
             if(optionalMaterial.isEmpty()) throw new ConflictException("Invalid material with id: " + material.getId());
             material = optionalMaterial.get();
@@ -78,7 +81,60 @@ public class ServiceService {
         serviceHasMaterialRepository.saveAll(service.getServiceMaterials());
     }
     
+    public void updateService(ServiceModel newServiceData) throws ConflictException, NotFoundException{
+    	Optional<ServiceModel> optional = serviceRepository.findById((long) newServiceData.getId());
+    	if(optional.isEmpty()) throw new NotFoundException("Service not found");
+    	
+    	ServiceModel service = optional.get();
+    	
+    	if(newServiceData.getName() != null) {
+    		if(serviceRepository.existsByName(newServiceData.getName())) throw new ConflictException("Service already exists");
+    		service.setName(newServiceData.getName());
+    	}
+    	if(newServiceData.getDescription() != null) service.setDescription(newServiceData.getDescription());
+    	if(newServiceData.getPrice() != 0) service.setDescription(newServiceData.getDescription());
+    	if(newServiceData.getPicture() != null) service.setPicture(newServiceData.getPicture());
+    	if(newServiceData.getDescription() != null) service.setDescription(newServiceData.getDescription());
+    	if(newServiceData.getTypeService() != null) {
+    		int idTypeService = newServiceData.getTypeService().getId();
+	    	Optional<TypeService> optionalTypeService = typeServiceRepository.findById((long) idTypeService);
+	        if(optionalTypeService.isEmpty()) throw new ConflictException("Invalid type service with id: " + idTypeService);
+	        service.setTypeService(optionalTypeService.get());
+    	}
+	    
+    	if(newServiceData.getServiceMaterials() != null) {
+	    	for(ServiceMaterial serviceMaterial: newServiceData.getServiceMaterials()) {
+	            Material material = serviceMaterial.getMaterial();
+
+	            if(serviceMaterial.getQuantity() == 0) throw new ConflictException("Specific quantity of material by id: " + material.getId());
+	            Optional<Material> optionalMaterial = materialRepository.findById((long) material.getId());
+	            if(optionalMaterial.isEmpty()) throw new ConflictException("Invalid material with id: " + material.getId());
+	            material = optionalMaterial.get();
+	            serviceMaterial.setMaterial(material);
+	            serviceMaterial.setService(service);
+	        }
+    	}
+    	
+    	service.setServiceMaterials(newServiceData.getServiceMaterials());
+    	
+    	if(newServiceData.getEmployees() != null) {
+			Set<Employee> employees = service.getEmployees();
+	    	
+	    	for(Employee employee: newServiceData.getEmployees()) {
+	             Optional<Employee> optionalEmployee = employeeRepository.findById((long) employee.getId());
+	             if(optionalEmployee.isEmpty()) throw new ConflictException("Invalid employee with id: " + employee.getId());
+	             employee = optionalEmployee.get();
+	             if(!employees.contains(employee)) employees.add(employee);
+	    	}
+	    	
+	    	service.setEmployees(employees);
+    	}
+    	
+    	serviceRepository.save(service);
+    }
+    
     public void deleteService(int id) throws NotFoundException {
+    	if(serviceRepository.findById((long) id).isEmpty()) throw new NotFoundException("Service Not Found");
         ServiceModel service = this.getServiceById(id);
         serviceRepository.delete(service);
     }
