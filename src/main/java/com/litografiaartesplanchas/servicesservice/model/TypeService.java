@@ -24,6 +24,9 @@ public class TypeService {
 	
 	@Column(name = "descripcion", nullable = false, length = 255)
 	private String description;
+	
+	@Column(name = "imagen", nullable = true, length = 255)
+	private String image;
 
 	public int getId() {
 		return id;
@@ -47,5 +50,13 @@ public class TypeService {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
 	}
 }
