@@ -21,6 +21,9 @@ public class TypeService {
 
 	@Column(name = "nombre", nullable = false, length = 45)
 	private String name;
+	
+	@Column(name = "descripcion", nullable = false, length = 255)
+	private String description;
 
 	public int getId() {
 		return id;
@@ -36,5 +39,13 @@ public class TypeService {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 }
